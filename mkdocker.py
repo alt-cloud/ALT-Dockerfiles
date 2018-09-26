@@ -48,7 +48,7 @@ try:
     parser.add_argument('-m', '--maintainer', default='alt-cloud')
     parser.add_argument('-r', '--run', nargs='+')
     parser.add_argument('-i', '--install', nargs='+')
-    parser.add_argument('--from', default='alt')
+    parser.add_argument('--from', default='alt:sisyphus')
     parser.add_argument('--env', nargs='+')
     parser.add_argument('--expose')
     parser.add_argument('--volume', nargs='+')
