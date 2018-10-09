@@ -16,7 +16,12 @@ def get_dockerfile_contents(kwargs):
                 arguments = [arguments]
             if instruction == 'install':
                 for argument in arguments:
-                    dockerfile += f'RUN apt-get update && apt-get install -y {argument} && apt-get clean\n'
+                    dockerfile += f'''RUN apt-get update && \\
+    apt-get install -y {argument}; \\
+    rm -f /var/cache/apt/archives/*.rpm \\
+          /var/cache/apt/*.bin \\
+          /var/lib/apt/lists/*.*
+'''
             elif instruction in list_instructions:
                 dockerfile += f'{upper} [' + ', '.join([f'"{a}"' for a in arguments]) + ']\n'
             else:
