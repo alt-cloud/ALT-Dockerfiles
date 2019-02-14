@@ -6,12 +6,19 @@ if [ ! -f custom/conf/app.ini ]; then
 fi
 
 start_sshd() {
+    # Store openssh config and keys in openssh directory to use them if
+    # container recreats
     if [ -d openssh ]; then
-        cp -a openssh -T /etc/openssh
+        cp -a openssh/* /etc/openssh/
     else
-        /usr/bin/ssh-keygen -A
-        cp -a /etc/openssh openssh
+        cp -a /etc/openssh -T openssh
     fi
+
+    if ! ls openssh/ssh_host_*_key openssh/ssh_host_*_key.pub &>/dev/null; then
+        /usr/bin/ssh-keygen -A
+        cp -a /etc/openssh/* openssh/
+    fi
+
     /usr/sbin/sshd -t
     /usr/sbin/sshd
 }
