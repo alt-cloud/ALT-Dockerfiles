@@ -26,4 +26,4 @@ COPY entrypoint.sh /entrypoint.sh
 EXPOSE 3000
 EXPOSE 2222
 
-CMD ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
