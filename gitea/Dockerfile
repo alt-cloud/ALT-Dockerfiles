@@ -26,4 +26,6 @@ COPY entrypoint.sh /entrypoint.sh
 EXPOSE 3000
 EXPOSE 2222
 
+VOLUME ["/var/lib/gitea"]
+
 ENTRYPOINT ["/entrypoint.sh"]
