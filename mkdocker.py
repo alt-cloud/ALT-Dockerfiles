@@ -22,6 +22,8 @@ def get_dockerfile_contents(kwargs):
           /var/cache/apt/*.bin \\
           /var/lib/apt/lists/*.*
 '''
+            elif instruction == 'expose':
+                dockerfile += f'{upper} ' + ' '.join(map(str, arguments)) + '\n'
             elif instruction in list_instructions:
                 dockerfile += f'{upper} [' + ', '.join([f'"{a}"' for a in arguments]) + ']\n'
             else:
@@ -31,10 +33,14 @@ def get_dockerfile_contents(kwargs):
     return dockerfile.rstrip() + '\n'
 
 
-def get_readme_contents(name):
+def get_readme_contents(name, expose):
     readme = ''
     header = f'dockerfiles-alt-{name}\n'
     readme += header + '='*len(header) + '\n'
+    if expose:
+        port_forward = ''.join([' -p {0}:{0}'.format(e) for e in expose])
+    else:
+        port_forward = ''
     readme += f'''
 ALT dockerfile for {name}.
 
@@ -42,7 +48,7 @@ Copy Dockerfile somewhere and build the image:
 `$ docker build --rm -t <username>/{name} .`
 
 And launch the {name} container:
-`docker run -it <username>/{name}`
+`docker run -it {port_forward} <username>/{name}`
 '''
     return readme
 
@@ -55,7 +61,7 @@ try:
     parser.add_argument('-i', '--install', nargs='+')
     parser.add_argument('--from', default='alt:sisyphus')
     parser.add_argument('--env', nargs='+')
-    parser.add_argument('--expose')
+    parser.add_argument('--expose', nargs='+', type=int)
     parser.add_argument('--volume', nargs='+')
     parser.add_argument('-u', '--user')
     # cmd could contain strings like flags (e.g. irb -m), so it has to be the
@@ -71,7 +77,7 @@ try:
         dockerfile.write(get_dockerfile_contents(args.__dict__))
 
     with open('README.md', 'w') as readme:
-        readme.write(get_readme_contents(name))
+        readme.write(get_readme_contents(name, args.expose))
 
 except FileExistsError as e:
     print(f'This dockerfile directory `{e.filename}` is already exists.')
