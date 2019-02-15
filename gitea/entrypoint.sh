@@ -1,5 +1,10 @@
 #!/bin/sh -eu
 
+# Use bash to debug startup errors
+if [ "${1-}" = bash ]; then
+    exec bash
+fi
+
 if [ ! -f custom/conf/app.ini ]; then
     mkdir -p custom/conf
     cp /etc/gitea/app.ini -t custom/conf
