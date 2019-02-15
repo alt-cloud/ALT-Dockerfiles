@@ -82,5 +82,8 @@ try:
 except FileExistsError as e:
     print(f'This dockerfile directory `{e.filename}` is already exists.')
 except Exception as e:
-    print('Something goes wrong')
+    if os.getenv('DEBUG'):
+        raise e
+    else:
+        print('Something goes wrong')
     print(e)
