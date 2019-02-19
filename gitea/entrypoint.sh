@@ -19,12 +19,10 @@ start_sshd() {
         cp -a /etc/openssh -T openssh
     fi
 
-    if ! ls openssh/ssh_host_*_key openssh/ssh_host_*_key.pub &>/dev/null; then
-        /usr/bin/ssh-keygen -A
-        cp -a /etc/openssh/* openssh/
-    fi
+    # Ensure keys created and saved to openssh directory
+    /usr/bin/ssh-keygen -A
+    cp -a /etc/openssh/* -t openssh
 
-    /usr/sbin/sshd -t
     /usr/sbin/sshd
 }
 
