@@ -9,7 +9,7 @@ RUN apt-get update && \
           /var/lib/apt/lists/*.*
 
 RUN apt-get update && \
-    apt-get install -y su; \
+    apt-get install -y gosu; \
     rm -f /var/cache/apt/archives/*.rpm \
           /var/cache/apt/*.bin \
           /var/lib/apt/lists/*.*

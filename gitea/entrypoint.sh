@@ -31,4 +31,4 @@ start_sshd
 chmod 0700 .
 chown gitea:gitea . -R
 
-exec su gitea -c "/usr/bin/gitea web"
+exec gosu gitea /usr/bin/gitea web
