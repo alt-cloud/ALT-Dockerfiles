@@ -51,4 +51,11 @@ RUN apt-get update && \
           /var/cache/apt/*.bin \
           /var/lib/apt/lists/*.*
 
+# install compilation utils
+RUN apt-get update && \
+    apt-get install -y make gcc gcc-c++; \
+    rm -f /var/cache/apt/archives/*.rpm \
+          /var/cache/apt/*.bin \
+          /var/lib/apt/lists/*.*
+
 CMD ["zsh"]
