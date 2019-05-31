@@ -1,4 +1,4 @@
-FROM altcloud/base
+FROM altcloud/base:p9
 
 MAINTAINER alt-cloud
 
