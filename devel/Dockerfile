@@ -32,14 +32,14 @@ RUN apt-get update && \
 
 # install network utils
 RUN apt-get update && \
-    apt-get install -y curl nmap; \
+    apt-get install -y curl iproute2; \
     rm -f /var/cache/apt/archives/*.rpm \
           /var/cache/apt/*.bin \
           /var/lib/apt/lists/*.*
 
 # install file utils
 RUN apt-get update && \
-    apt-get install -y silver-searcher; \
+    apt-get install -y lsof silver-searcher; \
     rm -f /var/cache/apt/archives/*.rpm \
           /var/cache/apt/*.bin \
           /var/lib/apt/lists/*.*
