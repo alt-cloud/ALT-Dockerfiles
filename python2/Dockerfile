@@ -1,4 +1,4 @@
-FROM altcloud/base:sisyphus
+FROM altlinux/base:sisyphus
 
 MAINTAINER alt-cloud
 
