@@ -1,4 +1,4 @@
-FROM alt:p9
+FROM alt:p10
 
 MAINTAINER alt-cloud
 
