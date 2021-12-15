@@ -2,7 +2,7 @@
 
 # update in Dockerfiles
 ORGANIZATION=altlinux
-latest=p10
+LATEST=p10
 
 at_exit() {
     git checkout master
@@ -34,7 +34,7 @@ process_image() {
     build_image "$image" "$tag" "$dir"
     push_image "$image" "$tag"
 
-    if [ "$tag" = "$latest" ]; then
+    if [ "$tag" = "$LATEST" ]; then
         build_image "$image" latest "$dir"
         push_image "$image" latest
     fi
