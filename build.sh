@@ -2,6 +2,7 @@
 
 # update in Dockerfiles
 ORGANIZATION=altlinux
+BRANCHES="p9 p10 sisyphus"
 LATEST=p10
 
 at_exit() {
@@ -40,7 +41,7 @@ process_image() {
     fi
 }
 
-for branch in p9 p10 sisyphus; do
+for branch in $BRANCHES; do
     git checkout "$branch"
     process_image base "$branch" base
     for image in $(find -maxdepth 1 -type d -regex '.*/[a-z0-9]*' -printf '%P\n'); do
