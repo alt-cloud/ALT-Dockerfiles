@@ -15,4 +15,6 @@ RUN sed -Ei 's/^([[:space:]]*listen[[:space:]]+)localhost(:80)/\10.0.0.0\2/' \
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
