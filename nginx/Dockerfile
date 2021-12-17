@@ -3,7 +3,7 @@ FROM alt:p10
 MAINTAINER alt-cloud
 
 RUN apt-get update && \
-    apt-get install -y nginx apache2-html; \
+    apt-get install -y nginx apache2-html tzdata; \
     rm -f /var/cache/apt/archives/*.rpm \
           /var/cache/apt/*.bin \
           /var/lib/apt/lists/*.*
